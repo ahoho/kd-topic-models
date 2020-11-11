@@ -1,6 +1,6 @@
 # Improving Neural Topic Models using Knowledge Distillation
 
-Repo for our EMNLP 2020 paper. We will clean up the implementation for improved ease-of-use, but provide the code included in our original submission for the time being. 
+Repo for our [EMNLP 2020 paper](https://www.aclweb.org/anthology/2020.emnlp-main.137/). We will clean up the implementation for improved ease-of-use, but provide the code included in our original submission for the time being. 
 
 If you use this code, please use the following citation:
 ```
@@ -25,18 +25,19 @@ If you use this code, please use the following citation:
     `conda env create -f teacher/teacher.yml`
     (edit the first line in the `yml` file if you want to change the name of the resulting environment; the default is `transformers28`).
 
-2. We don't have a general-purpose data processing pipeline together, but you can use the IMDb format as a guide:
+2. We use the data processing pipeline from [Scholar](https://github.com/dallascard/scholar). We'll use the IMDb data to serve as a guide (preprocessing scripts for the Wikitext and 20ng data are also included for replication purposes, but the processing scripts aren't general-purpose):
+
 ```
 conda activate scholar
 python data/imdb/download_imdb.py
 
 # main preprocessing script
 python preprocess_data.py data/imdb/train.jsonlist data/imdb/processed --vocab_size 5000 --test data/imdb/test.jsonlist
-# create a dev split from the train data
+# create a dev split from the train data--change filenames if using different data
 create_dev_split.py
 ```
 
-3. Run the teacher model. Below is what we used for IMDb
+3. Run the teacher model, below is an example using IMDb.
 ```
 conda activate transformers28
 
